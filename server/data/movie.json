@@ -1,0 +1,79 @@
+[
+  {
+    "id": "1703601075241",
+    "title": "The Cotton Club1 11111111",
+    "publishingYear": "2016",
+    "image": "http://44.201.221.218:3000/uploads/The_Cotton_Club.jpg",
+    "userID": 1
+  },
+  {
+    "id": "1703604123459",
+    "title": "The Shawshank Redemption",
+    "publishingYear": "2013",
+    "image": "http://44.201.221.218:3000/uploads/The_Shawshank_Redemption.jpg",
+    "userID": 1
+  },
+  {
+    "id": "1703601075249",
+    "title": "Crocodile Dundee",
+    "publishingYear": "2015",
+    "image": "http://44.201.221.218:3000/uploads/Valkyrie.jpg",
+    "userID": 1
+  },
+  {
+    "id": "1703604123455",
+    "title": "Stardust",
+    "publishingYear": "2013",
+    "image": "http://44.201.221.218:3000/uploads/Stardust.jpg",
+    "userID": 1
+  },
+  {
+    "id": "1703617514031",
+    "title": "Doloremque voluptate",
+    "publishingYear": "1992",
+    "image": "http://44.201.221.218:3000/uploads/9-Essential-Bakery-Business-Tips-That-Will-Make-Your-Bakery-a-Success.jpg",
+    "userID": 1
+  },
+  {
+    "id": "1703617697414",
+    "title": "Quod veniam quia co",
+    "publishingYear": "1986",
+    "image": "http://44.201.221.218:3000/uploads/beer-pictures-jx9mkyxm176x4109.jpg",
+    "userID": 1
+  },
+  {
+    "id": "1703618091091",
+    "title": "Ad totam similique s",
+    "publishingYear": "1970",
+    "image": "http://44.201.221.218:3000/uploads/Homemade-Dunkin-Donuts-WS-Thumb-scaled.jpg",
+    "userID": 1
+  },
+  {
+    "id": "1703618152868",
+    "title": "Qui distinctio Aut",
+    "publishingYear": "2018",
+    "image": "http://44.201.221.218:3000/uploads/beer-pictures-jx9mkyxm176x4109.jpg",
+    "userID": 1
+  },
+  {
+    "id": "1703618219064",
+    "title": "Temporibus qui ut re",
+    "publishingYear": "1977",
+    "image": "http://44.201.221.218:3000/uploads/logo-dark-svg (2).png",
+    "userID": 1
+  },
+  {
+    "id": "1703618301028",
+    "title": "Commodi Nam ea asper",
+    "publishingYear": "2018",
+    "image": "http://44.201.221.218:3000/uploads/Homemade-Dunkin-Donuts-WS-Thumb-scaled.jpg",
+    "userID": 1
+  },
+  {
+    "id": "1703618346921",
+    "title": "Quam eius in aliqua",
+    "publishingYear": "1985",
+    "image": "http://44.201.221.218:3000/uploads/Homemade-Dunkin-Donuts-WS-Thumb-scaled.jpg",
+    "userID": 1
+  }
+]

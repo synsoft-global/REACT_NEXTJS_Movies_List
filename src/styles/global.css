@@ -1,0 +1,164 @@
+:root {
+  --body-font: 'Montserrat', system-ui, sans-serif;
+  --spacing: 120px;
+  font-size: 16px;
+}
+
+@media(max-width:899px) {
+  :root {
+    --spacing: 80px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+}
+
+#__next {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-flow: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video {
+  object-fit: contain;
+  max-width: 100%;
+}
+
+button,
+input {
+  font-family: var(--body-font)
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="file" i]::-webkit-file-upload-button {
+  font-family: inherit;
+}
+
+
+/* Utility Classes
+======================== */
+.line-2,
+.line-3,
+.line-4,
+.line-5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.line-1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%;
+}
+
+.line-2 {
+  -webkit-line-clamp: 2
+}
+
+.line-3 {
+  -webkit-line-clamp: 3
+}
+
+.line-4 {
+  -webkit-line-clamp: 4
+}
+
+.line-5 {
+  -webkit-line-clamp: 5
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.m-lg {
+  margin: var(--spacing);
+}
+
+.mx-lg {
+  margin-left: var(--spacing);
+  margin-right: var(--spacing);
+}
+
+.my-lg {
+  margin-top: var(--spacing);
+  margin-bottom: var(--spacing);
+}
+
+.mt-lg {
+  margin-top: var(--spacing);
+}
+
+.mb-lg {
+  margin-bottom: var(--spacing);
+}
+
+.ml-lg {
+  margin-left: var(--spacing);
+}
+
+.mr-lg {
+  margin-right: var(--spacing);
+}
+
+.p-lg {
+  padding: var(--spacing);
+}
+
+.px-lg {
+  padding-left: var(--spacing);
+  padding-right: var(--spacing);
+}
+
+.py-lg {
+  padding-top: var(--spacing);
+  padding-bottom: var(--spacing);
+}
+
+.pt-lg {
+  padding-top: var(--spacing);
+}
+
+.pb-lg {
+  padding-bottom: var(--spacing);
+}
+
+.pl-lg {
+  padding-left: var(--spacing);
+}
+
+.pr-lg {
+  padding-right: var(--spacing);
+}

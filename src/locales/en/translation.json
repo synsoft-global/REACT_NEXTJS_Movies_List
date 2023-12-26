@@ -1,0 +1,45 @@
+{
+  "pages": {
+    "signIn": {
+      "pageTitle": "Sign In",
+      "heading": "Sign In",
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "login": "Login"
+    },
+    "movies": {
+      "pageTitle": "Movies List",
+      "heading": "My movies",
+      "noRecord": "Your movie list is empty"
+    },
+    "addMovie": {
+      "heading": "Create a new movie ",
+      "title": "Title",
+      "publishingYear": "Publishing year",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "dropImage": "Drop an image here",
+      "Edit": "Edit",
+      "update": "Update"
+    }
+  },
+  "api": {
+    "errorMessage": {
+      "INVALID_EMAIL": "Please enter an Email Id.",
+      "INVALID_PASSWORD": "Please enter your Password.",
+      "ACCESS_DENIED": "Unauthorised access",
+      "SOMETHING_WENT_WRONG": "Sorry, we are currently unable to service your request. Please try after some time.",
+      "MOVIE_NOT_FOUND": "Movie not found",
+      "INVALID_CREDENTIALS": "Email or password is incorrect",
+      "PROVIDE_MOVIE_ID": "Provide valid movie id",
+      "INVALID_PAGE_OR_PAGE_SIZE": "Invalid page number or page size"
+    },
+    "successMessage": {
+      "MOVIE_DELETED_MESSAGE": "Movie deleted",
+      "MOVIE_UPDATED_MESSAGE": "Movie updated",
+      "MOVIE_ADDED_MESSAGE": "Movie added",
+      "LOGIN_SUCCESS_MESSAGE": "Logged In"
+    }
+  }
+}

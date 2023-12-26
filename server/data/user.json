@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Dev1",
+        "password": "123456",
+        "id": 1,
+        "email": "dev1@mailinator.com"
+    },
+    {
+        "name": "Dev2",
+        "password": "123456",
+        "id": 2,
+        "email": "dev2@mailinator.com"
+    },
+    {
+        "name": "Dev3",
+        "password": "123456",
+        "id": 3,
+        "email": "dev3@mailinator.com"
+    },
+    {
+        "name": "Dev4",
+        "password": "123456",
+        "id": 4,
+        "email": "dev4@mailinator.com"
+    }
+]
