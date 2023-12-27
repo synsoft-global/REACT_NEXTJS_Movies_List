@@ -29,11 +29,14 @@
       "INVALID_EMAIL": "Please enter an Email Id.",
       "INVALID_PASSWORD": "Please enter your Password.",
       "ACCESS_DENIED": "Unauthorised access",
-      "SOMETHING_WENT_WRONG": "Sorry, we are currently unable to service your request. Please try after some time.",
+      "SOMETHING_WENT_WRONG": "Something went wrong",
       "MOVIE_NOT_FOUND": "Movie not found",
       "INVALID_CREDENTIALS": "Email or password is incorrect",
       "PROVIDE_MOVIE_ID": "Provide valid movie id",
-      "INVALID_PAGE_OR_PAGE_SIZE": "Invalid page number or page size"
+      "INVALID_PAGE_OR_PAGE_SIZE": "Invalid page number or page size",
+      "TOO_MANY_REQUEST": "Too many requests: You have exceeded the rate limit.",
+      "SERVICE_TEMPORARILY_UNAVAILABLE": "Service temporarily unavailable: Please try again later.",
+      "NO_INTERNET": "Server unreachable. Check your internet connection."
     },
     "successMessage": {
       "MOVIE_DELETED_MESSAGE": "Movie deleted",

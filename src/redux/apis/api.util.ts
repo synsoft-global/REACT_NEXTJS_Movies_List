@@ -1,5 +1,6 @@
 import { isRejectedWithValue, isFulfilled } from '@reduxjs/toolkit'
 import { MiddlewareAPI, Middleware } from '@reduxjs/toolkit'
+import { handleLogout } from '@/utils/auth.util'
 import toast from 'react-hot-toast'
 import i18n from '@/locales/i18n'
 
@@ -9,8 +10,11 @@ export const rtkQueryLogger: Middleware = (api: MiddlewareAPI) => (next) => (act
   if (isRejectedWithValue(action)) {
     const status = action.meta.baseQueryMeta.response?.status
     const errorMessage = getErrorMessage(status, action.payload)
-    toast.error(i18n.t(`api.errorMessage.${errorMessage}`) || 'Sorry! Something went wrong')
-    console.error(`😲 OMG Api Failed - Details: `, action.meta.baseQueryMeta.response)
+    if (errorMessage === 'ACCESS_DENIED') handleLogout()
+    else {
+      toast.error(i18n.t(`api.errorMessage.${errorMessage}`) || 'Sorry! Something went wrong')
+      console.error(`😲 OMG Api Failed - Details: `, action.meta.baseQueryMeta.response)
+    }
   }
 
   if (isFulfilled(action)) {
@@ -28,17 +32,17 @@ export const rtkQueryLogger: Middleware = (api: MiddlewareAPI) => (next) => (act
 const getErrorMessage = (status: number, payload: any) => {
   switch (status) {
     case 0:
-      return 'Server unreachable. Check your internet connection.'
+      return 'NO_INTERNET'
     case 429:
-      return 'Too many requests: You have exceeded the rate limit.'
+      return 'TOO_MANY_REQUEST'
     case 503:
-      return 'Service temporarily unavailable: Please try again later.'
+      return 'SERVICE_TEMPORARILY_UNAVAILABLE'
     default:
       if (status >= 400 && status <= 499) {
         return payload?.data?.message
       } else if (status >= 500) {
-        return payload?.data?.message || 'Sorry! something went wrong with server'
+        return payload?.data?.message || 'SOMETHING_WENT_WRONG'
       }
-      return 'Sorry! Something went wrong'
+      return 'SOMETHING_WENT_WRONG'
   }
 }

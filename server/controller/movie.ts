@@ -134,9 +134,11 @@ export const movieList = async (req: Request, res: Response) => {
         const movies = JSON.parse(data.movieList)
         const userMovies = movies.filter((movie: any) => movie.userID === user.id)
         // if (userMovies.length === 0) return res.status(200).json({ message: t('message', 'NO_DATA_FOUND') })
-        const startIndex = page <= 1 ? page : (page - 1) * pageSize
+        const startIndex = (page - 1) * pageSize
         const endIndex = startIndex + pageSize
-        const paginatedMovies = userMovies.slice(startIndex, endIndex)
+        const validEndIndex = Math.min(endIndex, userMovies.length)
+        const paginatedMovies = userMovies.slice(startIndex, validEndIndex)
+        
         res.json({
             totalMovies: userMovies.length,
             currentPage: page,

@@ -2,18 +2,12 @@ import { Stack, Typography, Button } from '@mui/material'
 import { PageHeaderProps } from './PageHeader.type'
 import { style } from './PageHeader.style'
 import { MdLogout } from 'react-icons/md'
-import { removeCookie } from '@/utils'
+import { handleLogout } from '@/utils/auth.util'
 
 
 
 export default function PageHeader(props: PageHeaderProps) {
   const { heading, ActionButtons, logout } = props
-
-
-  const handleLogout = () => {
-    window.location.href = '/auth/sign-in'
-    removeCookie('token')
-  }
 
 
   return (

@@ -4,14 +4,14 @@ const nextConfig = {
   pageExtensions: ['page.tsx', 'api.ts'],
   images: {
     remotePatterns: [
-      { protocol: 'http', hostname: '44.201.221.218', port: '3000', pathname: '/uploads/**' }
+      { protocol: 'http', hostname: '54.234.87.169', port: '3000', pathname: '/uploads/**' }
     ]
   },
-  async redirects() {
+  async rewrites() {
     return [
-      { source: '/', destination: '/movies', permanent: true },
+      { source: '/', destination: '/movies' },
     ]
-  }
+  },
 }
 
 module.exports = nextConfig

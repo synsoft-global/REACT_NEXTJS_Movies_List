@@ -10,6 +10,6 @@ export const style: Style = {
     backgroundImage: `url(${footerBg.src})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundPosition: 'left bottom',
+    backgroundPosition: 'left top',
   }
 }

@@ -20,6 +20,7 @@ export default function App(props: AppProps) {
   return <>
     <Head>
       <title>MovieList - Unlimited movies, TV shows and beyond</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>
 
     <Provider store={store}>

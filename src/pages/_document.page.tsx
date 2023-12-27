@@ -7,7 +7,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel='shortcut icon' type='image/x-icon' href={`${config.basePath}/favicon.ico`} />
         <link rel='apple-touch-icon' sizes='180x180' href={`${config.basePath}/apple-touch-icon.png`} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -35,7 +35,6 @@ export default function MovieForm(props: MovieFormProps) {
       )
     }
   })
-  console.log(watch())
 
 
   const onSubmit = async (data: FormSchemaType) => {
@@ -66,9 +65,8 @@ export default function MovieForm(props: MovieFormProps) {
           <ImageUpload
             defaultImage={data?.image}
             helperText={errors.image?.message}
-            onChange={(event) => {
-              if (!event.target.files?.length) return
-              setValue('image', event.target.files?.[0])
+            onChange={(file) => {
+              setValue('image', file)
               trigger('image')
             }}
           />

@@ -13,6 +13,10 @@ export const style: Style = {
     bgcolor: 'background.input',
     overflow: 'hidden',
     cursor: 'pointer',
+    minHeight: '100px',
+    ':hover, &.isHover': {
+      borderColor: 'primary.main',
+    }
   },
   uploadBox: {
     p: 2,
@@ -26,9 +30,9 @@ export const style: Style = {
     }
   },
   thumbnail: {
-    width: '100%',
     objectFit: 'contain',
     height: 'auto',
-    maxHeight: 'calc(100vh - 150px)'
+    width: 'auto',
+    maxHeight: 'calc(100vh - 100px)',
   }
 }
