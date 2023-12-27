@@ -52,7 +52,7 @@ export default function SignInForm() {
         {/* === Email === */}
         <Controller name='email' control={control}
           render={({ fieldState: { error }, field }) =>
-            <TextField {...field} placeholder='Email' type='email' error={!!error} helperText={error?.message} />
+            <TextField {...field} placeholder={t('pages.signIn.form.email')} type='email' error={!!error} helperText={t(error?.message as string)} />
           }
         />
 
@@ -60,7 +60,7 @@ export default function SignInForm() {
         {/* === Password === */}
         <Controller name='password' control={control}
           render={({ fieldState: { error }, field }) =>
-            <TextField {...field} placeholder='Password' type='password' error={!!error} helperText={error?.message} />
+            <TextField {...field} placeholder={t('pages.signIn.form.password')} type='password' error={!!error} helperText={t(error?.message as string)} />
           }
         />
 
@@ -70,14 +70,14 @@ export default function SignInForm() {
           <FormControl>
             <FormControlLabel
               control={<Checkbox checked={rememberMe} onChange={handleRememberMe} />}
-              label={<Typography variant='body2'>Remember me</Typography>}
+              label={<Typography variant='body2'>{t('pages.signIn.form.rememberMe')}</Typography>}
             />
           </FormControl>
         </Stack>
 
 
         {/* === Submit === */}
-        <LoadingButton variant='contained' type='submit' loading={isSubmitting}>Login</LoadingButton>
+        <LoadingButton variant='contained' type='submit' loading={isSubmitting}>{t('pages.signIn.form.login')}</LoadingButton>
 
       </Stack>
     </Stack>

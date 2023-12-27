@@ -3,22 +3,22 @@ import { setLocale } from 'yup'
 
 export default setLocale({
   mixed: {
-    default: (params) => `Enter valid value`,
-    required: (params) => `Required *`,
-    notType: (params) => `Enter valid value`,
-    notOneOf: (params) => `Enter valid value`,
+    default: (params) => `errorMessage.invalidValue`,
+    required: (params) => `errorMessage.required`,
+    notType: (params) => `errorMessage.invalidValue`,
+    notOneOf: (params) => `errorMessage.invalidValue`,
   },
   string: {
-    min: (params) => `Enter valid value`,
-    max: (params) => `Enter valid value`,
-    email: 'Enter valid email',
-    matches: (params) => `Enter valid value`,
-    url: (params) => `Enter valid URL`,
+    min: (params) => `errorMessage.invalidValue`,
+    max: (params) => `errorMessage.invalidValue`,
+    email: (params) => `errorMessage.invalidEmail`,
+    matches: (params) => `errorMessage.invalidValue`,
+    url: (params) => `errorMessage.invalidURL`,
   },
   number: {
-    min: (params) => `Enter valid value`,
-    max: (params) => `Enter valid value`,
-    moreThan: (params) => `Enter valid value`,
-    positive: (params) => `Enter valid value`,
+    min: (params) => `errorMessage.invalidValue`,
+    max: (params) => `errorMessage.invalidValue`,
+    moreThan: (params) => `errorMessage.invalidValue`,
+    positive: (params) => `errorMessage.invalidValue`,
   }
 })

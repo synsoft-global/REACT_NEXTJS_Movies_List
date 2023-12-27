@@ -167,3 +167,14 @@ input[type="file" i]::-webkit-file-upload-button {
 .pr-lg {
   padding-right: var(--spacing);
 }
+
+
+/* nProgress
+======================== */
+#nprogress .bar {
+  background: #2BD17E;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #2BD17E, 0 0 5px #2BD17E;
+}

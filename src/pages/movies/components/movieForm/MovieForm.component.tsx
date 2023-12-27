@@ -6,6 +6,7 @@ import { FormSchemaType, formSchema } from './MovieForm.config'
 import { LoadingButton } from '@mui/lab'
 import { useRouter } from 'next/router'
 import { useAddMovieMutation, useUpdateMovieMutation } from '@/redux/apis/movie.api'
+import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import ImageUpload from '@/components/_ui/imageUpload/ImageUpload.component'
 import toast from 'react-hot-toast'
@@ -14,13 +15,14 @@ import toast from 'react-hot-toast'
 
 export default function MovieForm(props: MovieFormProps) {
   const { mode, data } = props
+  const { t } = useTranslation()
   const router = useRouter()
   const [addMovie] = useAddMovieMutation()
   const [updateMovie] = useUpdateMovieMutation()
   const isSmDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
 
-  const { control, handleSubmit, setValue, watch, trigger, formState: { isSubmitting, errors } } = useForm<FormSchemaType>({
+  const { control, handleSubmit, setValue, trigger, formState: { isSubmitting, errors } } = useForm<FormSchemaType>({
     resolver: yupResolver(formSchema),
     defaultValues: {
       ...(mode === 'add' ?
@@ -48,11 +50,11 @@ export default function MovieForm(props: MovieFormProps) {
 
     if (mode === 'add') {
       await addMovie(formData as any)
-      toast.success('Movie added')
+      toast.success(t('pages.moviesList.form.movieAdded'))
     }
     else {
       await updateMovie(formData as any)
-      toast.success('Movie updated')
+      toast.success(t('pages.moviesList.form.movieUpdated'))
     }
     router.push('/movies')
   }
@@ -60,9 +62,9 @@ export default function MovieForm(props: MovieFormProps) {
 
   const SubmitButtons = () => (
     <Stack direction='row' gap={2} mt={5}>
-      <Button fullWidth variant='outlined' color='inherit' component={Link} href='/movies'>Cancel</Button>
+      <Button fullWidth variant='outlined' color='inherit' component={Link} href='/movies'>{t('pages.moviesList.form.cancel')}</Button>
       <LoadingButton fullWidth variant='contained' type='submit' loading={isSubmitting}>
-        {mode === 'add' ? 'Submit' : 'Update'}
+        {mode === 'add' ? t('pages.moviesList.form.submit') : t('pages.moviesList.form.update')}
       </LoadingButton>
     </Stack>
   )
@@ -100,7 +102,7 @@ export default function MovieForm(props: MovieFormProps) {
           <Grid item xs={12}>
             <Controller name='title' control={control}
               render={({ fieldState: { error }, field }) =>
-                <TextField {...field} placeholder='Title' error={!!error} helperText={error?.message} />
+                <TextField {...field} placeholder={t('pages.moviesList.form.title')} error={!!error} helperText={t(error?.message as string)} />
               }
             />
           </Grid>
@@ -109,7 +111,7 @@ export default function MovieForm(props: MovieFormProps) {
           <Grid item xs={12} md={6}>
             <Controller name='publishingYear' control={control}
               render={({ fieldState: { error }, field }) =>
-                <TextField {...field} placeholder='Publishing year' type='number' error={!!error} helperText={error?.message} onChange={({ target: { value } }) => field.onChange(value ? value : '')} />
+                <TextField {...field} placeholder={t('pages.moviesList.form.publishingYear')} type='number' error={!!error} helperText={t(error?.message as string)} onChange={({ target: { value } }) => field.onChange(value ? value : '')} />
               }
             />
           </Grid>

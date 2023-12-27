@@ -4,6 +4,7 @@ import { useLazyMovieListQuery } from '@/redux/apis/movie.api'
 import { MdAddCircleOutline } from 'react-icons/md'
 import { Page } from '@/types/Page.type'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 import { style } from './Movies.style'
 import PageHeader from '@/components/pageHeader/PageHeader.component'
 import MovieCard from '@/components/movieCard/MovieCard.component'
@@ -14,6 +15,7 @@ import Link from 'next/link'
 
 const Movies: Page = () => {
   const router = useRouter()
+  const { t } = useTranslation()
   const page = Number(router.query.page || 1)
   const [getMovieList, { isLoading, isUninitialized, data, isError, isFetching }] = useLazyMovieListQuery()
 
@@ -30,8 +32,8 @@ const Movies: Page = () => {
 
   const NoRecord = () => <>
     <Stack sx={style.noRecord}>
-      <Typography variant='h2'>Your movie list is empty</Typography>
-      <Button variant='contained' href='/movies/add' sx={style.addNewButton} component={Link}>Add a new movie</Button>
+      <Typography variant='h2'>{t('pages.moviesList.noRecord')}</Typography>
+      <Button variant='contained' href='/movies/add' sx={style.addNewButton} component={Link}>{t('pages.moviesList.addMovie')}</Button>
     </Stack>
   </>
 
@@ -41,9 +43,9 @@ const Movies: Page = () => {
 
       {/* === Page Header === */}
       <PageHeader
-        heading='My movies'
+        heading='pages.moviesList.heading'
         ActionButtons={
-          <Tooltip title='Add Movie'>
+          <Tooltip title={t('pages.moviesList.addMovie')}>
             <IconButton size='large' href='/movies/add' component={Link}>
               <MdAddCircleOutline />
             </IconButton>
@@ -56,7 +58,7 @@ const Movies: Page = () => {
       {(isLoading || isUninitialized) ?
         <Stack component={CircularProgress} mx='auto' />
         : isError ?
-          <Alert severity='error'>Sorry! Something went wrong</Alert>
+          <Alert severity='error'>{t('errorMessage.somethingWentWrong')}</Alert>
           :
           data?.totalMovies === 0 ?
             <NoRecord />
@@ -74,7 +76,7 @@ const Movies: Page = () => {
               }
 
               <Stack className='mt-lg' alignItems='center'>
-                <Pagination count={data?.totalPages} onChange={handlePageChange} />
+                <Pagination count={data?.totalPages} defaultPage={page} onChange={handlePageChange} />
               </Stack>
             </>
       }
@@ -86,7 +88,7 @@ const Movies: Page = () => {
 
 Movies.layoutProps = {
   pageType: 'protected',
-  title: 'Movies List'
+  title: 'pages.moviesList.pageTitle'
 }
 
 

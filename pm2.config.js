@@ -10,15 +10,18 @@ module.exports = {
       exec_mode: 'cluster',
       env_development: {
         PORT: 3000,
-        NEXT_PUBLIC_APP_ENV: 'dev'
+        NEXT_PUBLIC_APP_ENV: 'dev',
+        NEXT_APP_ENV: 'development'
       },
       env_staging: {
         PORT: 3000,
-        NEXT_PUBLIC_APP_ENV: 'staging'
+        NEXT_PUBLIC_APP_ENV: 'staging',
+        NEXT_APP_ENV: 'staging'
       },
       env_production: {
         PORT: 3000,
-        NEXT_PUBLIC_APP_ENV: 'prod'
+        NEXT_PUBLIC_APP_ENV: 'prod',
+        NEXT_APP_ENV: 'production'
       }
     }
   ]

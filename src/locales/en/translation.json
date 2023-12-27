@@ -3,25 +3,55 @@
     "signIn": {
       "pageTitle": "Sign In",
       "heading": "Sign In",
-      "email": "Email",
-      "password": "Password",
-      "rememberMe": "Remember me",
-      "login": "Login"
+      "form": {
+        "email": "Email",
+        "password": "Password",
+        "rememberMe": "Remember me",
+        "login": "Login"
+      }
     },
-    "movies": {
+    "moviesList": {
       "pageTitle": "Movies List",
       "heading": "My movies",
-      "noRecord": "Your movie list is empty"
+      "noRecord": "Your movie list is empty",
+      "addMovie": "Add a new movie",
+      "form": {
+        "movieAdded": "Movie added",
+        "movieUpdated": "Movie updated",
+        "title": "Title",
+        "publishingYear": "Publishing year",
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "dropImage": "Drop an image here",
+        "Edit": "Edit",
+        "update": "Update"
+      }
     },
     "addMovie": {
-      "heading": "Create a new movie ",
-      "title": "Title",
-      "publishingYear": "Publishing year",
-      "cancel": "Cancel",
-      "submit": "Submit",
+      "pageTitle": "Add Movie",
+      "heading": "Create a new movie "
+    },
+    "editMovie": {
+      "pageTitle": "Edit Movie",
+      "heading": "Edit "
+    }
+  },
+  "layout": {
+    "header": {
+      "logout": "Logout"
+    }
+  },
+  "common": {
+    "prev": "Prev",
+    "next": "Next",
+    "tryAgain": "Try again"
+  },
+  "components": {
+    "imageUpload": {
+      "invalidImageUploaded": "Please drop a valid image file",
+      "uploadImage": "Upload an image here",
       "dropImage": "Drop an image here",
-      "Edit": "Edit",
-      "update": "Update"
+      "dropHere": "Drop here"
     }
   },
   "api": {
@@ -44,5 +74,14 @@
       "MOVIE_ADDED_MESSAGE": "Movie added",
       "LOGIN_SUCCESS_MESSAGE": "Logged In"
     }
+  },
+  "errorMessage": {
+    "required": "Required *",
+    "invalidEmail": "Enter valid email",
+    "invalidURL": "Enter valid URL",
+    "invalidPassword": "Enter valid password",
+    "invalidValue": "Enter valid value",
+    "somethingWentWrong": "Sorry! Something went wrong",
+    "largeFile": "File size can be up to {{size}}"
   }
 }

@@ -1,1 +1,87 @@
-{}
+{
+  "pages": {
+    "signIn": {
+      "pageTitle": "Anmelden",
+      "heading": "Anmelden",
+      "form": {
+        "email": "E-Mail",
+        "password": "Passwort",
+        "rememberMe": "Erinnere dich an mich",
+        "login": "Anmelden"
+      }
+    },
+    "moviesList": {
+      "pageTitle": "Filmliste",
+      "heading": "Meine Filme",
+      "noRecord": "Ihre Filmliste ist leer",
+      "addMovie": "Neuen Film hinzufügen",
+      "form": {
+        "movieAdded": "Film hinzugefügt",
+        "movieUpdated": "Film aktualisiert",
+        "title": "Titel",
+        "publishingYear": "Veröffentlichungsjahr",
+        "cancel": "Abbrechen",
+        "submit": "Senden",
+        "dropImage": "Bild hier ablegen",
+        "Edit": "Bearbeiten",
+        "update": "Aktualisieren"
+      }
+    },
+    "addMovie": {
+      "pageTitle": "Film hinzufügen",
+      "heading": "Neuen Film erstellen"
+    },
+    "editMovie": {
+      "pageTitle": "Film bearbeiten",
+      "heading": "Bearbeiten"
+    }
+  },
+  "layout": {
+    "header": {
+      "logout": "Abmelden"
+    }
+  },
+  "common": {
+    "prev": "Zurück",
+    "next": "Weiter",
+    "tryAgain": "Versuchen Sie es erneut"
+  },
+  "components": {
+    "imageUpload": {
+      "invalidImageUploaded": "Bitte laden Sie eine gültige Bilddatei hoch",
+      "uploadImage": "Laden Sie hier ein Bild hoch",
+      "dropImage": "Bild hier ablegen",
+      "dropHere": "Hier ablegen"
+    }
+  },
+  "api": {
+    "errorMessage": {
+      "INVALID_EMAIL": "Bitte geben Sie eine E-Mail-Adresse ein.",
+      "INVALID_PASSWORD": "Bitte geben Sie Ihr Passwort ein.",
+      "ACCESS_DENIED": "Unberechtigter Zugriff",
+      "SOMETHING_WENT_WRONG": "Etwas ist schiefgelaufen",
+      "MOVIE_NOT_FOUND": "Film nicht gefunden",
+      "INVALID_CREDENTIALS": "E-Mail oder Passwort ist falsch",
+      "PROVIDE_MOVIE_ID": "Geben Sie eine gültige Film-ID an",
+      "INVALID_PAGE_OR_PAGE_SIZE": "Ungültige Seitennummer oder Seitengröße",
+      "TOO_MANY_REQUEST": "Zu viele Anfragen: Sie haben das Anfrage-Limit überschritten.",
+      "SERVICE_TEMPORARILY_UNAVAILABLE": "Dienst vorübergehend nicht verfügbar: Bitte versuchen Sie es später erneut.",
+      "NO_INTERNET": "Server nicht erreichbar. Überprüfen Sie Ihre Internetverbindung."
+    },
+    "successMessage": {
+      "MOVIE_DELETED_MESSAGE": "Film gelöscht",
+      "MOVIE_UPDATED_MESSAGE": "Film aktualisiert",
+      "MOVIE_ADDED_MESSAGE": "Film hinzugefügt",
+      "LOGIN_SUCCESS_MESSAGE": "Angemeldet"
+    }
+  },
+  "errorMessage": {
+    "required": "Erforderlich *",
+    "invalidEmail": "Geben Sie eine gültige E-Mail-Adresse ein",
+    "invalidURL": "Geben Sie eine gültige URL ein",
+    "invalidPassword": "Geben Sie ein gültiges Passwort ein",
+    "invalidValue": "Geben Sie einen gültigen Wert ein",
+    "somethingWentWrong": "Entschuldigung! Etwas ist schiefgelaufen",
+    "largeFile": "Die Dateigröße kann bis zu {{size}} betragen"
+  }
+}

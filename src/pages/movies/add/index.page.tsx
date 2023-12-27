@@ -8,7 +8,7 @@ import { Page } from '@/types/Page.type'
 const AddMovie: Page = () => {
   return (
     <Container>
-      <PageHeader heading='Create a new movie' />
+      <PageHeader heading='pages.addMovie.heading' />
       <MovieForm mode='add' />
     </Container>
   )
@@ -17,7 +17,7 @@ const AddMovie: Page = () => {
 
 AddMovie.layoutProps = {
   pageType: 'protected',
-  title: 'Add Movie'
+  title: 'pages.addMovie.pageTitle'
 }
 
 

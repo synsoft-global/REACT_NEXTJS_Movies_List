@@ -6,6 +6,7 @@ import { store } from '@/redux/store'
 import { Toaster } from 'react-hot-toast'
 import Head from 'next/head'
 import Layout from '@/layout/Layout.component'
+import ErrorBoundary from '@/components/errorBoundary/ErrorBoundary.component'
 import '@/styles/global.css'
 import '@/lib/yup/config'
 import '@/locales/i18n'
@@ -28,7 +29,9 @@ export default function App(props: AppProps) {
         <CssBaseline enableColorScheme />
         <Toaster position='bottom-left' />
         <Layout {...layoutProps}>
-          <Component {...pageProps} />
+          <ErrorBoundary>
+            <Component {...pageProps} />
+          </ErrorBoundary>
         </Layout>
       </ThemeProvider>
     </Provider>

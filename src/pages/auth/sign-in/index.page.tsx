@@ -22,7 +22,7 @@ const SignIn: Page = () => {
 
 SignIn.layoutProps = {
   pageType: 'auth',
-  title: 'Sign In',
+  title: 'pages.signIn.pageTitle',
 }
 
 

@@ -2,7 +2,7 @@
   {
     "id": "1703601075241",
     "title": "The Cotton Club1 11111111",
-    "publishingYear": "2016",
+    "publishingYear": "2018",
     "image": "http://54.234.87.169:3000/uploads/The_Cotton_Club.jpg",
     "userID": 1
   },
@@ -82,5 +82,12 @@
     "publishingYear": "2023",
     "image": "http://54.234.87.169:3000/uploads/Screenshot (1).png",
     "userID": 2
+  },
+  {
+    "id": "1703683233348",
+    "title": "Hic id veniam qui i",
+    "publishingYear": "1984",
+    "image": "http://54.234.87.169:3000/uploads/9-Essential-Bakery-Business-Tips-That-Will-Make-Your-Bakery-a-Success.jpg",
+    "userID": 1
   }
 ]

@@ -3,10 +3,12 @@ import { PageHeaderProps } from './PageHeader.type'
 import { style } from './PageHeader.style'
 import { MdLogout } from 'react-icons/md'
 import { handleLogout } from '@/utils/auth.util'
+import { useTranslation } from 'react-i18next'
 
 
 
 export default function PageHeader(props: PageHeaderProps) {
+  const { t } = useTranslation()
   const { heading, ActionButtons } = props
   const isMdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'))
 
@@ -16,7 +18,7 @@ export default function PageHeader(props: PageHeaderProps) {
 
       {/* === Heading & Action Buttons */}
       <Stack sx={style.leftBox}>
-        <Typography variant='h2'>{heading}</Typography>
+        <Typography variant='h2'>{t(heading)}</Typography>
         {ActionButtons}
       </Stack>
 
@@ -24,11 +26,11 @@ export default function PageHeader(props: PageHeaderProps) {
       {/* === Logout === */}
       <Stack>
         {isMdDown ?
-          <Tooltip title='Logout'>
+          <Tooltip title={t('layout.header.logout')}>
             <IconButton edge='end' onClick={handleLogout}><MdLogout /></IconButton>
           </Tooltip>
           :
-          <Button color='inherit' onClick={handleLogout} endIcon={<MdLogout />}>Logout</Button>
+          <Button color='inherit' onClick={handleLogout} endIcon={<MdLogout />}>{t('layout.header.logout')}</Button>
         }
       </Stack>
 

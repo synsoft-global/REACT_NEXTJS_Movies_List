@@ -1,4 +1,5 @@
 import { CSSProperties, ChangeEvent, DragEvent, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Stack, TextField, Theme, Typography, useMediaQuery } from '@mui/material'
 import { ImageUploadProps } from './ImageUpload.type'
 import { MdOutlineFileDownload } from 'react-icons/md'
@@ -10,6 +11,7 @@ import toast from 'react-hot-toast'
 
 export default function ImageUpload(props: ImageUploadProps) {
   const { helperText, onChange, defaultImage } = props
+  const { t } = useTranslation()
   const [file, setFile] = useState<File | string | undefined>(defaultImage)
   const fileRef = useRef<HTMLInputElement>()
   const [dragOver, setDragOver] = useState(false)
@@ -38,7 +40,7 @@ export default function ImageUpload(props: ImageUploadProps) {
     setDragOver(false)
     const file = e.dataTransfer.files[0]
     if (file && file.type.startsWith('image/')) handleChange(file)
-    else toast.error('Please drop a valid image file')
+    else toast.error(t('components.imageUpload.invalidImageUploaded'))
   }
 
 
@@ -73,9 +75,9 @@ export default function ImageUpload(props: ImageUploadProps) {
             <MdOutlineFileDownload className='upload-icon' />
             <Typography variant='body2'>
               {isMdDown ?
-                'Upload an image here'
+                t('components.imageUpload.uploadImage')
                 :
-                dragOver ? 'Drop here' : 'Drop an image here'
+                dragOver ? t('components.imageUpload.dropHere') : t('components.imageUpload.dropImage')
               }
             </Typography>
           </Stack>
@@ -88,7 +90,7 @@ export default function ImageUpload(props: ImageUploadProps) {
         InputProps={{ ref: fileRef }}
         sx={{ input: { display: 'none' } }}
         error={Boolean(helperText)}
-        helperText={helperText}
+        helperText={t(helperText as string)}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           if (event.target.files?.[0]) handleChange(event.target.files[0])
         }}
