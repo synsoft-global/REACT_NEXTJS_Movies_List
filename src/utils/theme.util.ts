@@ -24,7 +24,7 @@ let theme = createTheme({
     body2: { fontSize: '0.875rem', lineHeight: 1.714285, fontWeight: 400 },
     body3: { fontSize: '0.75rem', lineHeight: 2, fontWeight: 400 },
     caption: { fontSize: '0.875rem', lineHeight: 1.142859, fontWeight: 400 },
-    subtitle: { fontSize: '1.25rem', lineHeight: 1.6, fontWeight: 400 },
+    subtitle: { fontSize: '1.25rem', lineHeight: 1.6, fontWeight: 500 },
     subtitle1: undefined,
     subtitle2: undefined,
     overline: undefined
@@ -61,13 +61,14 @@ theme = createTheme(theme, {
     MuiContainer: {
       styleOverrides: {
         root: theme.unstable_sx({
-          maxWidth: { xs: 'min(100%, 1248px)' }
+          maxWidth: { xs: 'min(100%, 1248px)' },
+          px: 3,
         })
       }
     },
     MuiGrid: {
       defaultProps: {
-        spacing: theme.unstable_sx({ xs: 2, md: 3 })
+        spacing: 3
       }
     },
     MuiTypography: {
@@ -114,6 +115,18 @@ theme = createTheme(theme, {
           ...(ownerState.size === 'medium' && {
             p: '16px 28px', typography: 'body1', fontWeight: 700,
           })
+        })
+      }
+    },
+    MuiPagination: {
+      defaultProps: { shape: 'rounded' },
+      styleOverrides: {
+        root: theme.unstable_sx({
+          '.MuiPaginationItem-root': {
+            borderRadius: .4, typography: 'body1', fontWeight: 700, bgcolor: 'background.paper',
+            '&.MuiPaginationItem-previousNext': { bgcolor: 'transparent' },
+            '&.Mui-selected': { bgcolor: 'primary.main' }
+          }
         })
       }
     }

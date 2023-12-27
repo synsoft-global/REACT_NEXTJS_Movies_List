@@ -8,5 +8,12 @@ export const style: Style = {
     alignItems: 'center',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
+  },
+  leftBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 1.5,
+    flexWrap: 'wrap',
+    flex: 1,
   }
 }

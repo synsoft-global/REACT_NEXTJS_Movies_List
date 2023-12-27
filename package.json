@@ -14,7 +14,8 @@
     "deploy:dev": "pm2 startOrRestart pm2.config.js --env development",
     "deploy:stag": "pm2 startOrRestart pm2.config.js --env staging",
     "deploy:prod": "pm2 startOrRestart pm2.config.js --env production",
-    "start": "ts-node --project tsconfig.server.json server/index.ts",
+    "start:dev": "cross-env NEXT_APP_ENV=development ts-node --project tsconfig.server.json server/index.ts",
+    "start": "cross-env NEXT_APP_ENV=production ts-node --project tsconfig.server.json server/index.ts",
     "lint": "next lint"
   },
   "dependencies": {

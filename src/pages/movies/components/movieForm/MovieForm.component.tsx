@@ -1,4 +1,4 @@
-import { Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material'
+import { Button, Grid, Stack, TextField, Theme, useMediaQuery } from '@mui/material'
 import { Controller, useForm } from 'react-hook-form'
 import { MovieFormProps } from './MovieForm.type'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -17,14 +17,16 @@ export default function MovieForm(props: MovieFormProps) {
   const router = useRouter()
   const [addMovie] = useAddMovieMutation()
   const [updateMovie] = useUpdateMovieMutation()
+  const isSmDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
 
 
-  const { control, handleSubmit, setValue, watch, getValues, trigger, formState: { isSubmitting, errors } } = useForm<FormSchemaType>({
+  const { control, handleSubmit, setValue, watch, trigger, formState: { isSubmitting, errors } } = useForm<FormSchemaType>({
     resolver: yupResolver(formSchema),
     defaultValues: {
       ...(mode === 'add' ?
         {
           title: '',
+          publishingYear: '' as any
         }
         :
         {
@@ -56,12 +58,30 @@ export default function MovieForm(props: MovieFormProps) {
   }
 
 
+  const SubmitButtons = () => (
+    <Stack direction='row' gap={2} mt={5}>
+      <Button fullWidth variant='outlined' color='inherit' component={Link} href='/movies'>Cancel</Button>
+      <LoadingButton fullWidth variant='contained' type='submit' loading={isSubmitting}>
+        {mode === 'add' ? 'Submit' : 'Update'}
+      </LoadingButton>
+    </Stack>
+  )
+
+
   return (
     <Stack component='form' noValidate onSubmit={handleSubmit(onSubmit)}>
-      <Grid alignItems='start' container spacing={{ xs: 5, md: 15 }}>
+      <Grid alignItems='start' flexWrap='wrap-reverse' container spacing={{ xs: 3, md: 15 }}>
+
+        {/* === Submit & Cancel Mobile === */}
+        {isSmDown &&
+          <Grid item xs={12}>
+            <SubmitButtons />
+          </Grid>
+        }
+
 
         {/* === Thumbnail Upload === */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={6}>
           <ImageUpload
             defaultImage={data?.image}
             helperText={errors.image?.message}
@@ -74,7 +94,7 @@ export default function MovieForm(props: MovieFormProps) {
 
 
         {/* === Fields === */}
-        <Grid container item spacing={3} xs={12} md={6}>
+        <Grid container item spacing={3} xs={12} sm={6}>
 
           {/* --- Title --- */}
           <Grid item xs={12}>
@@ -86,21 +106,20 @@ export default function MovieForm(props: MovieFormProps) {
           </Grid>
 
           {/* --- Publishing Year --- */}
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Controller name='publishingYear' control={control}
               render={({ fieldState: { error }, field }) =>
-                <TextField {...field} placeholder='Publishing year' type='number' error={!!error} helperText={error?.message} onChange={({ target: { value } }) => field.onChange(value ? value : undefined)} />
+                <TextField {...field} placeholder='Publishing year' type='number' error={!!error} helperText={error?.message} onChange={({ target: { value } }) => field.onChange(value ? value : '')} />
               }
             />
           </Grid>
 
-          {/* --- Submit & Cancel --- */}
-          <Grid item xs={12}>
-            <Stack direction='row' gap={2} mt={5}>
-              <Button fullWidth variant='outlined' color='inherit' component={Link} href='/movies'>Cancel</Button>
-              <LoadingButton fullWidth variant='contained' type='submit' loading={isSubmitting}>Submit</LoadingButton>
-            </Stack>
-          </Grid>
+          {/* --- Submit & Cancel Desktop --- */}
+          {!isSmDown &&
+            <Grid item xs={12}>
+              <SubmitButtons />
+            </Grid>
+          }
 
         </Grid>
       </Grid>

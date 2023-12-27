@@ -9,15 +9,15 @@ module.exports = {
       watch: false,
       exec_mode: 'cluster',
       env_development: {
-        PORT: 5051,
+        PORT: 3000,
         NEXT_PUBLIC_APP_ENV: 'dev'
       },
       env_staging: {
-        PORT: 5051,
+        PORT: 3000,
         NEXT_PUBLIC_APP_ENV: 'staging'
       },
       env_production: {
-        PORT: 5051,
+        PORT: 3000,
         NEXT_PUBLIC_APP_ENV: 'prod'
       }
     }

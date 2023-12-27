@@ -18,7 +18,7 @@ const envFilePath = path.join(__dirname, '../', '.env')
 
 dotenv.config({ path: envFilePath })
 
-const dev = process.env.NODE_ENV !== 'production'
+const dev = process.env.NEXT_APP_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const port = process.env.PORT || 3000

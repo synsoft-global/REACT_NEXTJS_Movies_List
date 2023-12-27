@@ -51,7 +51,7 @@ export default function ImageUpload(props: ImageUploadProps) {
   return (
     <Stack gap={.5} sx={style.root}>
       <Stack
-        sx={style.box}
+        sx={{ ...style.box, borderColor: (theme) => helperText ? `${theme.palette.error.main} !important` : '#fff' }}
         onClick={() => fileRef.current?.querySelector('input')?.click()}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
