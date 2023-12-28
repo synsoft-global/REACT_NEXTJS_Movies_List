@@ -11,6 +11,8 @@ import fs from 'fs'
 import jwt from 'jsonwebtoken'
 import path from 'path'
 import { User } from '../interface/interface'
+import UserModel from '../mongodb/models/user.model'
+import { t } from './locales.service'
 
 
 const filePath = path.join(__dirname, '../data', 'user.json')
@@ -22,7 +24,7 @@ export const readUserFile = async () => {
 }
 export const createToken = async (user: User) => {
     const secretKey: any = process.env.SECRET_KEY
-    const token = jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '9h' })
+    const token = jwt.sign({ _id: user._id, email: user.email }, secretKey, { expiresIn: '24h' })
     return token
 }
 
@@ -39,4 +41,18 @@ export const validateToken = async (token: string) => {
         value = { message: 'Something went wrong' }
     }
     return value
+}
+
+export const loginUser = async (email: string, password: string): Promise<any> => {
+    let user
+    try {
+        user = await UserModel.findOne({ email })
+
+        if (!user) return null
+        if (user.email === email && user.password !== password) return null
+        return user
+
+    } catch (error) {
+        return null
+    }
 }

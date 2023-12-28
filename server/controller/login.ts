@@ -9,27 +9,19 @@
 
 import { Request, Response } from 'express'
 
-import { createToken, readUserFile } from '../service/login.service'
+import { createToken, loginUser } from '../service/login.service'
 import { t } from "../service/locales.service"
 
 
 /**
- * @swagger
- * /api/hello:
- *   get:
- *     description: Returns the hello world
- *     responses:
- *       200:
- *         description: hello world
  * @param {Request} req - Express request object
  * @param {Response} res - Express response object
  * @returns {Promise<"LOGIN_SUCCESS_MESSAGE">}
  * @throws INVALID_CREDENTIALS
  */
-export const login = async (req: Request, res: Response) => {   
+export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body
-    const users = await readUserFile()
-    const user = users.find((u: any) => u.email === email && u.password === password)
+    const user = await loginUser(email, password)
 
     if (user) {
         const token = await createToken(user)

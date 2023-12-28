@@ -13,6 +13,7 @@ import route from './routes/routes'
 import dotenv from 'dotenv'
 import path from 'path'
 import { initTranslations } from './service/locales.service'
+import connectDB from './mongodb'
 
 const envFilePath = path.join(__dirname, '../', '.env')
 
@@ -27,7 +28,6 @@ initTranslations('message');
   try {
     await app.prepare()
     const server = express()
-
     server.use(bodyParser.json({ limit: '10mb' }))
     server.use('/api', route)
     server.use('/uploads', express.static(path.join(__dirname, './uploads')));
@@ -35,8 +35,9 @@ initTranslations('message');
       return handle(req, res)
     })
     server.listen(port, (err?: any) => {
+      connectDB()
       if (err) throw err
-      console.log(`> Ready on localhost:${port} - env ${process.env.NODE_ENV}`)
+      console.log(`> Ready on localhost:${port} - env ${process.env.NODE_ENV}`,process.env.NEXT_APP_ENV)
     })
   } catch (e) {
     console.error(e)

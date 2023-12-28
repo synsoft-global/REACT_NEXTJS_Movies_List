@@ -6,17 +6,19 @@
  *
  */
 
+import { Document } from "mongoose"
 
 
-export interface Movies {
-    id: number,
+
+export interface Movies extends Document{
     title: string,
     publishingYear: string,
     image: string,
-    userID: number
+    userID: string
+    name: string
 } 
 
-export interface User {
+export interface User extends Document {
     name: string
     password: number | string,
     id: number

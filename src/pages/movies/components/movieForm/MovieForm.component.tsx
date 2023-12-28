@@ -42,21 +42,24 @@ export default function MovieForm(props: MovieFormProps) {
 
 
   const onSubmit = async (data: FormSchemaType) => {
-    const formData = new FormData()
-    formData.append('title', data.title)
-    formData.append('publishingYear', String(data.publishingYear))
-    formData.append('image', data.image)
-    if (mode === 'edit') formData.append('id', router.query.id as string)
+    try{
+      const formData = new FormData()
+      formData.append('title', data.title)
+      formData.append('publishingYear', String(data.publishingYear))
+      formData.append('image', data.image)
+      if (mode === 'edit') formData.append('id', router.query.id as string)
 
-    if (mode === 'add') {
-      await addMovie(formData as any)
-      toast.success(t('pages.moviesList.form.movieAdded'))
+      if (mode === 'add') {
+        await addMovie(formData as any).unwrap()
+        toast.success(t('pages.moviesList.form.movieAdded'))
+      }
+      else {
+        await updateMovie(formData as any).unwrap()
+        toast.success(t('pages.moviesList.form.movieUpdated'))
+      }
+      router.push('/movies')
     }
-    else {
-      await updateMovie(formData as any)
-      toast.success(t('pages.moviesList.form.movieUpdated'))
-    }
-    router.push('/movies')
+    catch(error){console.error(error)}
   }
 
 

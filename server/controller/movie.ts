@@ -8,8 +8,7 @@
 
 
 import { Request, Response } from 'express'
-import { Movies } from '../interface/interface'
-import { movieFileRead, writeImageFile, writeInMovieFile } from '../service/movie.service'
+import { deleteData, getMoviesByUserId, insertMovie, movieById, unLinkFile, updateData, writeImageFile } from '../service/movie.service'
 import { t } from '../service/locales.service'
 
 
@@ -23,34 +22,23 @@ export const addMovie = async (req: Request, res: Response) => {
     try {
 
         let imageDetails: any
-        const { title, publishingYear, user } = req.body as { title: string; publishingYear: string; user?: { id: number } }
+        const { title, publishingYear, user } = req.body as { title: string; publishingYear: string; user: { _id: string } }
 
-        const rawData = await movieFileRead()
-
-        if (rawData.message !== 'Success') return res.status(401).json(rawData)
-        const movieData = JSON.parse(rawData.movieList)
         if (req?.file) {
             imageDetails = await writeImageFile(req)
         }
-        const id = new Date().getTime().toString()
 
         const newMovie = {
-            id: id,
             title,
             publishingYear,
             image: req?.file ? `${process.env.SERVER_DOMAIN}uploads/${imageDetails.originalname}` : '',
-            userID: user?.id
+            userID: user._id,
+            name: imageDetails.originalname
         }
-
-        movieData.push(newMovie)
-
-        // Decode Base64 and save the image
-        const response = await writeInMovieFile(movieData)
+        const response: any = await insertMovie(newMovie)
         if (response.message !== 'Success') return res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
         else return res.status(201).json({ movie: newMovie })
     } catch (error) {
-        console.log('error', error);
-
         return res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
     }
 }
@@ -64,31 +52,19 @@ export const addMovie = async (req: Request, res: Response) => {
  */
 export const updateMovie = async (req: Request, res: Response) => {
     const { id } = req.body
+    let response: any
     try {
-        const jsonData: any = await movieFileRead()
-
-        if (jsonData.message !== 'Success') return res.status(401).json(jsonData)
-        const movies: any = JSON.parse(jsonData.movieList)
-
-        const index: number = movies.findIndex((item: Movies) => item.id === id)
-
-        if (index !== -1) {
-            delete req?.body?.user
-            if (req?.file) {
-                delete req?.body?.image
-                const imageDetails = await writeImageFile(req)
-                movies[index] = { ...movies[index], ...req?.body, image: `${process.env.SERVER_DOMAIN}uploads/${imageDetails.originalname}` }
-            } else movies[index] = { ...movies[index], ...req?.body }
-
-            const response = await writeInMovieFile(movies)
-            if (response.message !== 'Success') return res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
-            else return res.status(201).json({ message: t('message', 'MOVIE_UPDATED_MESSAGE') })
-        } else {
-            res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
-        }
+        delete req?.body?.user
+        if (req.file) {
+            const imageDetails = await writeImageFile(req)
+            response = await updateData(id, { ...req.body, image: `${process.env.SERVER_DOMAIN}uploads/${imageDetails.originalname}` })
+            await unLinkFile(response.movie.name)
+        } else response = await updateData(id, req.body)
+        if (response.message !== 'Success') return res.status(500).json({ message: t('message', response.message) })
+        else return res.status(201).json({ message: t('message', 'MOVIE_UPDATED_MESSAGE') })
     } catch (error: any) {
         console.error(`Error updating movie: ${error.message}`)
-        res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
+        res.status(500).json({ message: t('message', response.message) })
     }
 }
 
@@ -101,16 +77,9 @@ export const updateMovie = async (req: Request, res: Response) => {
  */
 export const deleteMovie = async (req: Request, res: Response) => {
     const { id } = req?.body
-    const rawData = await movieFileRead()
-    if (rawData.message !== 'Success') return res.status(401).json(rawData)
-
-    const movieData = JSON.parse(rawData.movieList)
-
-    const newJson = movieData.filter((a: any) => a.id !== id)
-
-    const response = await writeInMovieFile(newJson)
-    if (response.message !== 'Success') return res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
-    else return res.status(201).json({ message: t('message', 'MOVIE_DELETED_MESSAGE') })
+    const response: any = await deleteData(id)
+    if (response.message !== 'Success') return res.status(500).json({ message: t('message', response.message) })
+    else return res.status(201).json({ message: t('message', response.message) })
 }
 
 
@@ -122,34 +91,18 @@ export const deleteMovie = async (req: Request, res: Response) => {
  */
 export const movieList = async (req: Request, res: Response) => {
     const page: any = req?.query?.page || 1
-    let pageSize: any = req?.query?.pageSize || 10
-
-    if (pageSize <= 0) pageSize = 10
-    const { user } = req.body
-    const data: any = await movieFileRead()
-
-    if (data.message !== 'Success') return res.status(401).json(data)
-
+    let pageSize: any = req?.query?.pageSize || 5
     try {
-        const movies = JSON.parse(data.movieList)
-        const userMovies = movies.filter((movie: any) => movie.userID === user.id)
-        // if (userMovies.length === 0) return res.status(200).json({ message: t('message', 'NO_DATA_FOUND') })
-        const startIndex = (page - 1) * pageSize
-        const endIndex = startIndex + pageSize
-        const validEndIndex = Math.min(endIndex, userMovies.length)
-        const paginatedMovies = userMovies.slice(startIndex, validEndIndex)
-        
-        res.json({
-            totalMovies: userMovies.length,
+        const response: any = await getMoviesByUserId(req.body.user, page, pageSize)
+        return res.json({
+            totalMovies: response?.totalMovies > 0 ? response?.totalMovies : 0,
             currentPage: page,
             pageSize: pageSize,
-            totalPages: Math.ceil(userMovies.length / pageSize),
-            movies: paginatedMovies,
+            totalPages: response?.totalMovies > 0 ? Math.ceil(response?.totalMovies / pageSize) : 1,
+            movies: response?.movies.length > 0 ? response?.movies : [],
         })
     } catch (error) {
-        console.log('err', error);
-
-        res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
+        return res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
     }
 }
 
@@ -160,25 +113,13 @@ export const movieList = async (req: Request, res: Response) => {
  * @throws SOMETHING_WENT_WRONG
  */
 export const getMovie = async (req: Request, res: Response) => {
-    const id: any = req?.params?.movieId
-    const { user } = req.body
-    const data: any = await movieFileRead()
-
-    if (data.message !== 'Success') return res.status(401).json(data)
-
+    const { movieId }: any = req?.params
     try {
-        const movies = JSON.parse(data.movieList)
-        const userMovies = movies.filter((movie: any) => movie.userID === user.id && movie.id == id)
-        if (userMovies.length == 0) {
-            res.status(400).json({ message: t('message', 'NO_DATA_FOUND') })
-        } else {
-            res.json({
-                movie: userMovies[0],
-            })
-        }
-
+        const movies: any = await movieById(movieId)
+        console.log(movies);
+        if (Object.keys(movies)?.length == 0) return res.status(400).json({ message: t('message', 'MOVIE_NOT_FOUND') })
+        else return res.json(movies)
     } catch (error) {
-        console.log('err', error);
-        res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
+        return res.status(500).json({ message: t('message', 'SOMETHING_WENT_WRONG') })
     }
 }

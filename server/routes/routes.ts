@@ -10,9 +10,8 @@
 import { Router } from 'express'
 import { login } from '../controller/login'
 import { check } from 'express-validator'
-import { authenticateToken, handleValidationErrors, isMovieAvailable, upload } from '../middleware'
+import { authenticateToken, handleValidationErrors, isIdAvailable, isMovieAvailable, upload } from '../middleware'
 import { addMovie, deleteMovie, movieList, updateMovie, getMovie } from '../controller/movie'
-import { t } from '../service/locales.service'
 
 
 const route = Router()
@@ -25,10 +24,10 @@ route.post('/login', [
 )
 
 route.post('/addMovie', upload.single('image'), authenticateToken, addMovie)
-route.get('/getMovie/:movieId', authenticateToken, getMovie)
+route.get('/getMovie/:movieId', authenticateToken, isIdAvailable, getMovie)
 
 route.get('/movieList', authenticateToken, movieList)
-route.post('/updateMovie', authenticateToken, upload.single('image'), isMovieAvailable, updateMovie)
-route.delete('/deleteMovie', authenticateToken, isMovieAvailable, deleteMovie)
+route.post('/updateMovie', authenticateToken, upload.single('image'), isIdAvailable, isMovieAvailable, updateMovie)
+route.delete('/deleteMovie', authenticateToken, isIdAvailable, isMovieAvailable, deleteMovie)
 
 export default route

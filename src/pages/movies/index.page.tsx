@@ -69,7 +69,7 @@ const Movies: Page = () => {
                 <Grid container columnSpacing={{ xs: 2.5, sm: 3 }} rowSpacing={{ xs: 5, sm: 3 }}>
                   {data?.movies.map((item, index) =>
                     <Grid item xs={6} sm={4} md={3} key={index}>
-                      <MovieCard data={item} link={`/movies/edit/${item.id}`} />
+                      <MovieCard data={item} link={`/movies/edit/${item._id}`} />
                     </Grid>
                   )}
                 </Grid>
